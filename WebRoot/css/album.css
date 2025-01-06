@@ -1,0 +1,115 @@
+.photo-wall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-row {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.row-container {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    animation: scroll 60s linear infinite;
+    filter: blur(3px);
+}
+
+.photo-row:nth-child(1) .row-container {
+    animation-duration: 80s;
+}
+
+.photo-row:nth-child(2) .row-container {
+    animation-duration: 65s;
+}
+
+.photo-row:nth-child(3) .row-container {
+    animation-duration: 70s;
+}
+
+.photo-row:nth-child(4) .row-container {
+    animation-duration: 75s;
+}
+
+.photo-row[data-direction="left"] .row-container {
+    animation-direction: reverse;
+}
+
+.photo-item {
+    height: 25vh;
+    width: 25vh;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin: 0;
+    transition: transform 0.3s;
+}
+
+.photo-item:hover {
+    transform: scale(1.1);
+    filter: blur(0);
+    z-index: 1;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-33.33%);
+    }
+}
+
+#content {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.photo-row::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0) 5%,
+            rgba(0, 0, 0, 0) 95%,
+            rgba(0, 0, 0, 0.2) 100%);
+    pointer-events: none;
+}
+
+.photo-wall::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.row-container {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}

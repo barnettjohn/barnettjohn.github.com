@@ -1,2 +1,0 @@
-# barnettjohn.github.com
-blog
